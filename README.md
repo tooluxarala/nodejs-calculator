@@ -1,0 +1,16 @@
+ # Calculatrice
+
+## I. Logique combinatoire
+### 1 - créer un fichier calculator.js avec une méthode de classe Calculator.add(a, b) qui permet d'ajouter deux nombres entiers 
+### 2 - créer un fichier server.js et importer la classe 'Calculator'.
+    * Ajouter le message console.log("Add: 2 + 3 = " + calculator.add(2, 3))
+    * Lancer le programme avec ``node server.js``. Vous devriez voir le message 'Add: 2 + 3 = 5'
+### 3 - Ajouter une méthode Calculator.subtract(a,b) qui permet de faire la différence entre deux nombres entiers
+    * Ajouter dans server.js le message console.log("Sub: 7 - 3 = " + calculator.subtract(7, 3)) 
+    * Lancer le programme avec ``node server.js``. Vous devriez voir le message 'Sub: 7 - 3 = 4'
+### 4 - Ajouter une méthode Calculator.multiply(a,b) qui permet de faire la multiplication entre deux nombres entiers
+    * Ajouter dans server.js le message console.log("Mul: 5 x 3 = " + calculator.multiplt(5, 3))
+    * Lancer le programme avec ``node server.js``. Vous devriez voir le message 'Mul: 5 x 3 = 15'
+### 5 - Ajouter une méthode Calculator.divide(a,b) qui permet de faire la division entre deux nombres entiers
+    * Ajouter dans server.js le message console.log("Div: 9 / 3 = " + calculator.multiplt(9, 3))
+    * Lancer le programme avec ``node server.js``. Vous devriez voir le message 'Div: 9 / 3 = 3'
