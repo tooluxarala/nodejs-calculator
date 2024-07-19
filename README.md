@@ -14,3 +14,18 @@
 ### 5 - Ajouter une méthode Calculator.divide(a,b) qui permet de faire la division entre deux nombres entiers
     * Ajouter dans server.js le message console.log("Div: 9 / 3 = " + calculator.multiplt(9, 3))
     * Lancer le programme avec ``node server.js``. Vous devriez voir le message 'Div: 9 / 3 = 3'
+
+##II Micro-service de calcul
+
+### 1 - créer un endpoint POST avec le module Http qui prend deux paramètre ‘a’ et ‘b’ et qui appelle la methode Calculator.add(a, b)
+    * Lancer le programme avec ``node server.js``. 
+    * Tester l’application en utilisant le navigateur our un client HTTP. Vous devriez voir le message 'Add: 2 + 3 = 5'
+### 2 - créer un endpoint POST avec le module Http qui prend deux paramètre ‘a’ et ‘b’ et qui appelle la methode Calculator.subtract(a, b)
+    * Lancer le programme avec ``node server.js``.
+    * Tester l’application en utilisant le navigateur our un client HTTP. Vous devriez voir le message 'Sub: 7- 3 = 4'
+### 3 - créer un endpoint POST avec le module Http qui prend deux paramètre ‘a’ et ‘b’ et qui appelle la methode Calculator.multiply (a, b)
+    * Lancer le programme avec ``node server.js``.
+    * Tester l’application en utilisant le navigateur our un client HTTP. Vous devriez voir le message 'Mul: 5 x 3 = 15'
+### 4 - créer un endpoint POST avec le module Http qui prend deux paramètre ‘a’ et ‘b’ et qui appelle la methode Calculator.divide (a, b)
+    * Lancer le programme avec ``node server.js``.
+    * Tester l’application en utilisant le navigateur our un client HTTP. Vous devriez voir le message 'Div: 9 / 3 = 3'
