@@ -12,7 +12,7 @@
     * Ajouter dans server.js le message console.log("Mul: 5 x 3 = " + calculator.multiplt(5, 3))
     * Lancer le programme avec ``node server.js``. Vous devriez voir le message 'Mul: 5 x 3 = 15'
 ### 5 - Ajouter une méthode Calculator.divide(a,b) qui permet de faire la division entre deux nombres entiers
-    * Ajouter dans server.js le message console.log("Div: 9 / 3 = " + calculator.multiplt(9, 3))
+    * Ajouter dans server.js le message console.log("Div: 9 / 3 = " + calculator.divide(9, 3))
     * Lancer le programme avec ``node server.js``. Vous devriez voir le message 'Div: 9 / 3 = 3'
 
 ##II Micro-service de calcul
