@@ -15,7 +15,7 @@
     * Ajouter dans server.js le message console.log("Div: 9 / 3 = " + calculator.divide(9, 3))
     * Lancer le programme avec ``node server.js``. Vous devriez voir le message 'Div: 9 / 3 = 3'
 
-##II Micro-service de calcul
+## II Micro-service de calcul
 
 ### 1 - créer un endpoint POST avec le module Http /add qui prend deux paramètre ‘a’ et ‘b’ et qui appelle la methode Calculator.add(a, b)
     * Lancer le programme avec ``node server.js``. 
