@@ -19,13 +19,45 @@
 
 ### 1 - créer un endpoint REST POST avec le module Http /add qui prend deux paramètre ‘a’ et ‘b’ et qui appelle la methode Calculator.add(a, b)
     * Lancer le programme avec ``node server.js``. 
-    * Tester l’application en utilisant le navigateur our un client HTTP. Vous devriez voir le message 'Add: 2 + 3 = 5'
+    * Tester l’application en utilisant le navigateur our un client HTTP. Vous devriez voir le message:
+    ```{
+        "operation": "Add",
+        "params": {
+            "a": 2,
+            "b": 3
+        },
+        "result": 5
+    }```
 ### 2 - créer un endpoint REST POST avec le module Http /subtract qui prend deux paramètre ‘a’ et ‘b’ et qui appelle la methode Calculator.subtract(a, b)
     * Lancer le programme avec ``node server.js``.
-    * Tester l’application en utilisant le navigateur our un client HTTP. Vous devriez voir le message 'Sub: 7- 3 = 4'
+    * Tester l’application en utilisant le navigateur our un client HTTP. Vous devriez voir le message:
+    ```{
+        "operation": "Sub",
+        "params": {
+            "a": 7,
+            "b": 3
+        },
+        "result": 4
+    }```
 ### 3 - créer un endpoint REST POST avec le module Http /multiply qui prend deux paramètre ‘a’ et ‘b’ et qui appelle la methode Calculator.multiply (a, b)
     * Lancer le programme avec ``node server.js``.
-    * Tester l’application en utilisant le navigateur our un client HTTP. Vous devriez voir le message 'Mul: 5 x 3 = 15'
+    * Tester l’application en utilisant le navigateur our un client HTTP. Vous devriez voir le message:
+    ```{
+        "operation": "Sub",
+        "params": {
+            "a": 7,
+            "b": 3
+        },
+        "result": 4
+    }```
 ### 4 - créer un endpoint REST POST avec le module Http /divide qui prend deux paramètre ‘a’ et ‘b’ et qui appelle la methode Calculator.divide (a, b)
     * Lancer le programme avec ``node server.js``.
-    * Tester l’application en utilisant le navigateur our un client HTTP. Vous devriez voir le message 'Div: 9 / 3 = 3'
+    * Tester l’application en utilisant le navigateur our un client HTTP. Vous devriez voir le message:
+     ```{
+        "operation": "Div",
+        "params": {
+            "a": 9,
+            "b": 3
+        },
+        "result": 3
+    }```
