@@ -93,7 +93,7 @@
 
 ## III. Approfondissement (devoir maison)
 
-### 1 - créer le endpoint REST /sum qui utilise Calculator.sum([termes]) et permet d’ajouter les éléments d’une liste envoyé en paramètre
+### 1 - créer le endpoint REST POST /sum qui utilise Calculator.sum([termes]) et permet d’ajouter les éléments d’une liste envoyé en paramètre
 
 - Lancer le programme avec ``node server.js``.
 - Tester l’application en utilisant le navigateur our un client HTTP. Vous devriez voir le message:
@@ -109,7 +109,7 @@
     }
  ```
 
-### 2 – créer le endpoint REST /mean qui utilise Calculator.mean([termes]) et permet de calculer la moyenne des éléments d’une liste envoyé en paramètre selon leur signe
+### 2 – créer le endpoint REST POST /mean qui utilise Calculator.mean([termes]) et permet de calculer la moyenne des éléments d’une liste envoyé en paramètre selon leur signe
 
 - Lancer le programme avec ``node server.js``.
 - Tester l’application en utilisant le navigateur our un client HTTP. Vous devriez voir le message:
@@ -124,3 +124,45 @@
         "result": 3
   }
 ```
+
+### 3 - créer le endpoint REST GET /operations qui utilise Calculator.operations() et permet de retourner une liste des opérations supportées par la calculatrice
+
+- Lancer le programme avec ``node server.js``.
+- Tester l’application en utilisant le navigateur our un client HTTP. Vous devriez voir le message:
+ ```
+  [
+      "add",
+      "subtract",
+      "multiply"
+      "divide",
+      "sum",
+      "mean"
+  ]
+ ```
+
+### 4 - créer le endpoint REST GET /operations/:name qui utilise Calculator.operation(name) et permet de retourner les informations sur une operation donnée
+
+- Lancer le programme avec ``node server.js``.
+- Tester l’application en utilisant le navigateur our un client HTTP. Vous devriez voir le message:
+ ```
+ # GET /operations/add
+ {
+      "operation": "add"
+      "params": "int a, b"
+      "result": "integer"
+  }
+
+  # GET /operations/sum
+ {
+      "operation": "sum"
+      "params": "int array"
+      "result": "integer"
+  }
+
+  # GET /operations/mean
+ {
+      "operation": "mean"
+      "params": "int array"
+      "result": "double"
+  }
+ ```
