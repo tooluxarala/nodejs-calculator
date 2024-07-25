@@ -14,6 +14,9 @@ class Calculator {
         }
         return a / b;
     }
+    static sum(a,b,c){
+        return a+b+c;
+    }
 }
 
 module.exports = Calculator;
