@@ -1,41 +1,87 @@
-const { error } = require('console');
-const Calculator = require('./calculator');
+const { createServer } = require('node:http');
 
-//console.log("Addition de : 5 + 10 = " + Calculator.add(5, 10));
-//console.log("Soustraction de : 7 - 3 = " + Calculator.subtract(7, 3));
-//console.log("Multipli de : 5 * 3 = " + Calculator.multipli(5, 3));
-//console.log("division de : 9 / 3 = " + Calculator.div(9, 3));
-
-
-const http = require('http');
 const url = require('url');
-const hostname = '127.0.0.1';
 
-const server = http.createServer((req, res) => {
-    const parsedUrl = url.parse(req.url, true);
-    if (req.method === 'POST' && parsedUrl.pathname === '/add') {
-        let body = '';
-        req.on('error', error => {
-            res.statusCode = 400;
-            res.end('on arrive pas a lire le request body :' + error);
+const Calculator = require('./calculator.js');
+const { buffer } = require('stream/consumers');
 
-        });
-        req.on('data', chunk => {
-            body += chunk.toString();
-        });
-        req.on('end', () => {
-            const params = JSON.parse (body);
-            const a = parseInt(params.a);
-            const b = parseInt(params.b);
-            const result = Calculator.add(a, b);
-            res.writeHead(200, { 'Content-Type': 'application/json' });
-            res.end(JSON.stringify({ result: result }));
-        });
+console.log("Add: 2 + 3 = " + Calculator.add(2, 3))
+
+console.log("Sub: 7 - 3 = " + Calculator.subtract(7, 3))
+
+console.log("Mul: 5 x 3 = " + Calculator.multipli(5, 3))
+
+console.log("Div: 9 / 3 = " + Calculator.div(9, 3))
+
+//console.log("Div: 9 / 0 = " + Calculator.divide(9, 0))
+
+const processOperation = (pathname, params) => {
+    let a = parseInt(params.a);
+    let b = parseInt(params.b);
+    let operationResult = {
+        "operation": pathname.substring(1),
+        params
+    };
+    if (pathname === '/add') {
+        operationResult.result = Calculator.add(a, b);
+    } else if (pathname === '/subtract') {
+        operationResult.result = Calculator.subtract(a, b);
+    } else if (pathname === '/multiply') {
+        operationResult.result = Calculator.multipli(a, b);
+    } else if (pathname === '/divide') {
+        operationResult.result = Calculator.div(a, b);
+    } else {
+        throw new Error("Innvalid operation '" + operationResult.operation + "'");
     }
-    else {
-        res.writeHead(404, { 'Content-Type': 'text/plain' });
-        res.end('Not found');
+    return operationResult;
+}
+
+
+const hostname = '127.0.0.1';
+const port = 3000;
+
+const server = createServer((req, res) => {
+    const parsedUrl = url.parse(req.url, true);
+    res.setHeader('Content-Type', 'application/json');
+    // Note: This is for debuging purpose
+    //console.log('parsedUrl: ' + JSON.stringify(parsedUrl))
+
+    if (req.method === 'POST') {
+        let body = [];
+        req.on('error', err => {
+            console.error(err);
+            res.statusCode = 400
+            res.end("Error getting request body: " + err)
+        }).on('data', chunk => {
+            body.push(chunk);
+        }).on('end', () => {
+            body = Buffer.concat(body).toString();
+            // At this point, we have the headers, method, url and body, and can now
+            // do whatever we need to in order to respond to this request.
+
+            try{
+
+                let params = JSON.parse(body)
+
+                let result = processOperation(parsedUrl.pathname, params)
+    
+                res.statusCode = 200
+    
+                res.end(JSON.stringify(result))
+            } catch(error){
+                console.log("Failed processing request: " + error );
+                res.statusCode = 400;
+                res.end("Failed processing request: " + error);
+            }
+        });
+
+    } else {
+        res.statusCode = 404 // Not found
+        res.end('Not found')
     }
 });
-const PORT = 3000;
-server.listen(PORT, () => { console.log(`Server running at http://${hostname}: ${PORT}`); });
+
+
+server.listen(port, hostname, () => {
+    console.log(`Server running at http://${hostname}:${port}/`);
+});
