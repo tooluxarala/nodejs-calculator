@@ -13,11 +13,14 @@ console.log("Mul: 5 x 3 = " + Calculator.multiply(5, 3))
 
 console.log("Div: 9 / 3 = " + Calculator.divide(9, 3))
 
+console.log("Sum: 2+3+5 ="+ Calculator.sum(2,3,5));
+
 //console.log("Div: 9 / 0 = " + Calculator.divide(9, 0))
 
 const processOperation = (pathname, params) => {
     let a = parseInt(params.a);
     let b = parseInt(params.b);
+    let c= parseInt(params.c);
     let operationResult = {
         "operation": pathname.substring(1),
         params
@@ -30,7 +33,10 @@ const processOperation = (pathname, params) => {
         operationResult.result = Calculator.multiplyi(a, b);
     } else if (pathname === '/divide') {
         operationResult.result = Calculator.divide(a, b);
-    } else {
+    } else if (pathname === '/sum') {
+        operationResult.result = Calculator.sum(a, b,c);
+    }
+      else {
         throw new Error("Innvalid operation '" + operationResult.operation + "'");
     }
     return operationResult;
