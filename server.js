@@ -9,9 +9,9 @@ console.log("Add: 2 + 3 = " + Calculator.add(2, 3))
 
 console.log("Sub: 7 - 3 = " + Calculator.subtract(7, 3))
 
-console.log("Mul: 5 x 3 = " + Calculator.multipli(5, 3))
+console.log("Mul: 5 x 3 = " + Calculator.multiply(5, 3))
 
-console.log("Div: 9 / 3 = " + Calculator.div(9, 3))
+console.log("Div: 9 / 3 = " + Calculator.divide(9, 3))
 
 //console.log("Div: 9 / 0 = " + Calculator.divide(9, 0))
 
@@ -27,9 +27,9 @@ const processOperation = (pathname, params) => {
     } else if (pathname === '/subtract') {
         operationResult.result = Calculator.subtract(a, b);
     } else if (pathname === '/multiply') {
-        operationResult.result = Calculator.multipli(a, b);
+        operationResult.result = Calculator.multiplyi(a, b);
     } else if (pathname === '/divide') {
-        operationResult.result = Calculator.div(a, b);
+        operationResult.result = Calculator.divide(a, b);
     } else {
         throw new Error("Innvalid operation '" + operationResult.operation + "'");
     }
