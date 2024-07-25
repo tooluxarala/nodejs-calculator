@@ -17,6 +17,11 @@ class Calculator {
     static sum(a,b,c){
         return a+b+c;
     }
+    static mean(a,b,c){
+        return a+b+c/3;
+    }
+    static opertarion(add,subtract,multiply,divide,sum,mean){
+        return add,subtract,multiply,divide,sum,mean;
+    }
 }
-
 module.exports = Calculator;
