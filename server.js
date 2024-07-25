@@ -15,12 +15,17 @@ console.log("Div: 9 / 3 = " + Calculator.divide(9, 3))
 
 console.log("Sum: 2+3+5 ="+ Calculator.sum(2,3,5));
 
+console.log("mean: 7-3+5 ="+ Calculator.mean(7,-3,5));
+
+console.log("operation: add,subtract,multiply,divide,sum,mean:");
+
 //console.log("Div: 9 / 0 = " + Calculator.divide(9, 0))
 
 const processOperation = (pathname, params) => {
     let a = parseInt(params.a);
     let b = parseInt(params.b);
     let c= parseInt(params.c);
+
     let operationResult = {
         "operation": pathname.substring(1),
         params
@@ -30,11 +35,16 @@ const processOperation = (pathname, params) => {
     } else if (pathname === '/subtract') {
         operationResult.result = Calculator.subtract(a, b);
     } else if (pathname === '/multiply') {
-        operationResult.result = Calculator.multiplyi(a, b);
+        operationResult.result = Calculator.multiply(a, b);
     } else if (pathname === '/divide') {
         operationResult.result = Calculator.divide(a, b);
     } else if (pathname === '/sum') {
         operationResult.result = Calculator.sum(a, b,c);
+    } else if (pathname === '/mean') {
+        operationResult.result = Calculator.mean(a, b,c);
+    }
+    else if (pathname === '/operation') {
+        operationResult.result = Calculator.opertarion(Calculator.add, Calculator.subtract,Calculator.multiply,Calculator.divide,Calculator.sum,Calculator.mean);
     }
       else {
         throw new Error("Innvalid operation '" + operationResult.operation + "'");
