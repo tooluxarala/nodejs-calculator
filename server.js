@@ -1,7 +1,6 @@
+
 const { createServer } = require('node:http');
-
 const url = require('url');
-
 const Calculator = require('./calculator.js');
 const { buffer } = require('stream/consumers');
 
@@ -15,72 +14,93 @@ console.log("Div: 9 / 3 = " + Calculator.divide(9, 3))
 
 //console.log("Div: 9 / 0 = " + Calculator.divide(9, 0))
 
-const processOperation = (pathname, params) => {
-    let a = parseInt(params.a);
-    let b = parseInt(params.b);
-    let operationResult = {
-        "operation": pathname.substring(1),
-        params
-    };
-    if (pathname === '/add') {
-        operationResult.result = Calculator.add(a, b);
-    } else if (pathname === '/subtract') {
-        operationResult.result = Calculator.subtract(a, b);
-    } else if (pathname === '/multiply') {
-        operationResult.result = Calculator.multiply(a, b);
-    } else if (pathname === '/divide') {
-        operationResult.result = Calculator.divide(a, b);
-    } else {
-        throw new Error("Innvalid operation '" + operationResult.operation + "'");
-    }
-    return operationResult;
-}
-
-
 const hostname = '127.0.0.1';
 const port = 3000;
 
 const server = createServer((req, res) => {
     const parsedUrl = url.parse(req.url, true);
     res.setHeader('Content-Type', 'application/json');
-    // Note: This is for debuging purpose
-    //console.log('parsedUrl: ' + JSON.stringify(parsedUrl))
 
     if (req.method === 'POST') {
         let body = [];
         req.on('error', err => {
             console.error(err);
-            res.statusCode = 400
-            res.end("Error getting request body: " + err)
+            res.statusCode = 400;
+            res.end(JSON.stringify({ error: "Error getting request body: " + err }));
         }).on('data', chunk => {
             body.push(chunk);
         }).on('end', () => {
             body = Buffer.concat(body).toString();
-            // At this point, we have the headers, method, url and body, and can now
-            // do whatever we need to in order to respond to this request.
-
-            try{
-
-                let params = JSON.parse(body)
-
-                let result = processOperation(parsedUrl.pathname, params)
-    
-                res.statusCode = 200
-    
-                res.end(JSON.stringify(result))
-            } catch(error){
-                console.log("Failed processing request: " + error );
+            let params;
+            try {
+                params = JSON.parse(body);
+            } catch (e) {
                 res.statusCode = 400;
-                res.end("Failed processing request: " + error);
+                res.end(JSON.stringify({ error: "Invalid JSON" }));
+                return;
             }
-        });
 
+            const a = parseInt(params.a, 10);
+            const b = parseInt(params.b, 10);
+
+            if (isNaN(a) || isNaN(b)) {
+                res.statusCode = 400;
+                res.end(JSON.stringify({ error: "Invalid numbers" }));
+                return;
+            }
+
+            let result;
+            if (parsedUrl.pathname === '/add') {
+                result = { operation: "Add", params, result: Calculator.add(a, b) };
+            } else if (parsedUrl.pathname === '/subtract') {
+                result = { operation: "Subtract", params, result: Calculator.subtract(a, b) };
+            } else if (parsedUrl.pathname === '/multiply') {
+                result = { operation: "Multiply", params, result: Calculator.multiply(a, b) };
+            } else if (parsedUrl.pathname === '/divide') {
+                try {
+                    result = { operation: "Divide", params, result: Calculator.divide(a, b) };
+                } catch (e) {
+                    res.statusCode = 400;
+                    res.end(JSON.stringify({ error: e.message }));
+                    return;
+                }
+            } else if (parsedUrl.pathname === '/sum') {
+                result = { operation: "sum", params: params.terms, result: Calculator.sum(params.terms) };
+            } else if (parsedUrl.pathname === '/mean') {
+                result = { operation: "mean", params: params.terms, result: Calculator.mean(params.terms) };
+            } else {
+                res.statusCode = 404;
+                res.end(JSON.stringify({ error: 'Not found' }));
+                return;
+            }
+
+            res.statusCode = 200;
+            res.end(JSON.stringify(result));
+        });
+    } else if (req.method === 'GET') {
+        if (parsedUrl.pathname === '/operations') {
+            const operations = Calculator.operations();
+            res.statusCode = 200;
+            res.end(JSON.stringify(operations));
+        } else if (parsedUrl.pathname.startsWith('/operations/')) {
+            const operationName = parsedUrl.pathname.split('/').pop();
+            const operationInfo = Calculator.operation(operationName);
+            if (operationInfo) {
+                res.statusCode = 200;
+                res.end(JSON.stringify(operationInfo));
+            } else {
+                res.statusCode = 404;
+                res.end(JSON.stringify({ error: 'Operation not found' }));
+            }
+        } else {
+            res.statusCode = 404;
+            res.end(JSON.stringify({ error: 'Not found' }));
+        }
     } else {
-        res.statusCode = 404 // Not found
-        res.end('Not found')
+        res.statusCode = 405; // Method Not Allowed
+        res.end(JSON.stringify({ error: 'Use POST method' }));
     }
 });
-
 
 server.listen(port, hostname, () => {
     console.log(`Server running at http://${hostname}:${port}/`);
