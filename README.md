@@ -226,7 +226,7 @@ license: (ISC) Apache-2.0
   }
 ```
 - lancer le programme avec ``npm start`` 
-- Ajouter le log ``console.log("New log before start !")`` dans le fichier ``server.js`` après la ``ligne 21`` et enregistrer.
+- Ajouter le log ``console.log("New log before start !")`` dans le fichier ``server.js`` après la ligne ``console.log("Div: 9 / 3 = " + Calculator.divide(9, 3))`` et enregistrer.
 - Vérifier que le programme redémare automatiquement dans le terminal. Le nouveau log doit apparaître dans le terminal.
 
 ### 3 - Ajouter la librairie monment.js pour calculer le temps de démarrage du server
