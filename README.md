@@ -201,8 +201,9 @@ license: (ISC) Apache-2.0
   "author": "Toolu Xarala",
   "license": "Apache-2.0"
 }
-- Vérifier également que le fichier ``package-lock.json`` est bien créée. Ce fichier est généré et gèré par NPM donc pas besoin d'y toucher. Il contient toute la hiérachie des dépendances et doit être commité sur Git.
 ```
+- Vérifier également que le fichier ``package-lock.json`` est bien créée. Ce fichier est généré et gèré par NPM donc pas besoin d'y toucher. Il contient toute la hiérachie des dépendances et doit être commité sur Git.
+
 - lancer le programme avec ``npm start``
 - Vérifier que le programme est bien lancé en testant tous les endpoints précédemment créés
 
@@ -225,8 +226,8 @@ license: (ISC) Apache-2.0
   }
 ```
 - lancer le programme avec ``npm start`` 
-- Ajouter le log ``console.log("New log before start !")`` dans le fichier ``server.js`` à la ``ligne 21``
-- Vérifier que le programme redémare automatiquement dans le terminal
+- Ajouter le log ``console.log("New log before start !")`` dans le fichier ``server.js`` après la ``ligne 21`` et enregistrer.
+- Vérifier que le programme redémare automatiquement dans le terminal. Le nouveau log doit apparaître dans le terminal.
 
 ### 3 - Ajouter la librairie monment.js pour calculer le temps de démarrage du server
 - Documentation: https://momentjs.com/docs/
@@ -238,3 +239,23 @@ license: (ISC) Apache-2.0
   }
 
 ```
+- Ajouter ce code snippet au début du fichier ``server.js``:
+
+```
+const moment = require('moment')
+
+let start = moment.now();
+
+```
+- Ajouter/Mettre à jour ce code snippet à la fin du fichier ``server.js``:
+
+```
+server.listen(port, hostname, () => {
+    console.log(`Server running at http://${hostname}:${port}/`);
+    let end = moment.now()
+    let startupTimeMilis = end - start
+    console.log("Started server in " + (startupTimeMilis / 1000) + "s")
+});
+
+```
+- Enregistrer le fichier. Vérifier que le log de démarrage ``"Started server in ...s"`` apparaît dans le terminal.
