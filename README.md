@@ -166,3 +166,75 @@
       "result": "double"
   }
  ```
+
+## IV. Ajout du gestionnaire de paquets/dépendances NPM
+
+### 1 - Ajouter NPM au projet 
+- Executer la commande ``npm init`` :
+```
+package name: (nodejs-calculator) 
+version: (1.0.0) 
+description: A Node.js calculator API
+entry point: server.js
+test command: 
+git repository: 
+keywords: Node.js, Math
+author: Toolu Xarala
+license: (ISC) Apache-2.0
+
+```
+- Vérifier que le fichier ``package.json`` est créé avec les bonnes valeurs
+```
+{
+  "name": "nodejs-calculator",
+  "version": "1.0.0",
+  "description": "A Node.js calculator API",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "keywords": [
+    "Node.js",
+    "Math"
+  ],
+  "author": "Toolu Xarala",
+  "license": "Apache-2.0"
+}
+- Vérifier également que le fichier ``package-lock.json`` est bien créée. Ce fichier est généré et gèré par NPM donc pas besoin d'y toucher. Il contient toute la hiérachie des dépendances et doit être commité sur Git.
+```
+- lancer le programme avec ``npm start``
+- Vérifier que le programme est bien lancé en testant tous les endpoints précédemment créés
+
+### 2 - Ajouter la librairie Nodemon en mode developpement pour faire du hot-reloading
+- Documentation: https://github.com/remy/nodemon#nodemon
+- Executer la commande ``npm install nodemon --save-dev``
+- Vérifier que la dépendance de développement ``nodemon``est bien créée dans le fichier ``package.json``:
+```
+ "devDependencies": {
+    "nodemon": "^3.1.4"
+  }
+
+```
+- Vérifier que le dossier des dépendances ``node_modules`` est bien créé et contient ``Nodemon``. Ce dossier est créé et gèré par NPM, donc pas besoin d'y toucher. C'est un dossier à ne surtout pas commiter dans Git. 
+- Modifier le start script pour utiliser ``Nodemon`` :
+```
+  "scripts": {
+      "test": "echo \"Error: no test specified\" && exit 1",
+      "start": "nodemon server.js"
+  }
+```
+- lancer le programme avec ``npm start`` 
+- Ajouter le log ``console.log("New log before start !")`` dans le fichier ``server.js`` à la ``ligne 21``
+- Vérifier que le programme redémare automatiquement dans le terminal
+
+### 3 - Ajouter la librairie monment.js pour calculer le temps de démarrage du server
+- Documentation: https://momentjs.com/docs/
+- Executer la commande ``npm install moment``
+- Vérifier que la dépendance ``moment`` est bien créée dans le fichier ``package.json``:
+```
+  "dependencies": {
+    "moment": "^2.30.1"
+  }
+
+```
