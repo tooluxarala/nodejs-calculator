@@ -1,5 +1,7 @@
 # Calculatrice
 
+Ce projet est une serie d'exercices pour apprendre et bien se familiariser avec Node.js. La documentation de ce dernier se trouve à cette addresse: https://nodejs.org/en/learn/
+
 ## I. Logique combinatoire
 
 ### 1 - créer un fichier calculator.js avec une méthode de classe Calculator.add(a, b) qui permet d'ajouter deux nombres entiers
