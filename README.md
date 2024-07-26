@@ -205,7 +205,6 @@ license: (ISC) Apache-2.0
   "license": "Apache-2.0"
 }
 ```
-- Vérifier également que le fichier ``package-lock.json`` est bien créée. Ce fichier est généré et gèré par NPM donc pas besoin d'y toucher. Il contient toute la hiérachie des dépendances et doit être commité sur Git.
 
 - lancer le programme avec ``npm start``
 - Vérifier que le programme est bien lancé en testant tous les endpoints précédemment créés
@@ -220,7 +219,8 @@ license: (ISC) Apache-2.0
   }
 
 ```
-- Vérifier que le dossier des dépendances ``node_modules`` est bien créé et contient ``Nodemon``. Ce dossier est créé et gèré par NPM, donc pas besoin d'y toucher. C'est un dossier à ne surtout pas commiter dans Git. 
+- Vérifier que le dossier des dépendances ``node_modules`` est bien créé et contient ``Nodemon``. Ce dossier est créé et gèré par NPM, donc pas besoin d'y toucher. C'est un dossier à ne surtout pas commiter dans Git.
+- Vérifier également que le fichier ``package-lock.json`` est bien créée. Ce fichier est généré et gèré par NPM donc pas besoin d'y toucher. Il contient toute la hiérachie des dépendances et doit être commité sur Git. 
 - Modifier le start script pour utiliser ``Nodemon`` :
 ```
   "scripts": {
@@ -229,7 +229,7 @@ license: (ISC) Apache-2.0
   }
 ```
 - lancer le programme avec ``npm start`` 
-- Ajouter le log ``console.log("New log before start !")`` dans le fichier ``server.js`` après la ``ligne 21`` et enregistrer.
+- Ajouter le log ``console.log("New log before start !")`` dans le fichier ``server.js`` après la ligne ``console.log("Div: 9 / 3 = " + Calculator.divide(9, 3))`` et enregistrer.
 - Vérifier que le programme redémare automatiquement dans le terminal. Le nouveau log doit apparaître dans le terminal.
 
 ### 3 - Ajouter la librairie monment.js pour calculer le temps de démarrage du server

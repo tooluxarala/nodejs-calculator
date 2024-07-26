@@ -1,6 +1,12 @@
+
+const moment = require('moment')
+
+let start = moment.now();
+
 const { createServer } = require('node:http');
 
 const url = require('url');
+
 
 const Calculator = require('./calculator.js');
 const { buffer } = require('stream/consumers');
@@ -14,6 +20,7 @@ console.log("Mul: 5 x 3 = " + Calculator.multiply(5, 3))
 console.log("Div: 9 / 3 = " + Calculator.divide(9, 3))
 
 //console.log("Div: 9 / 0 = " + Calculator.divide(9, 0))
+console.log("New log before start !")
 
 const processOperation = (pathname, params) => {
     let a = parseInt(params.a);
@@ -84,4 +91,7 @@ const server = createServer((req, res) => {
 
 server.listen(port, hostname, () => {
     console.log(`Server running at http://${hostname}:${port}/`);
+    let end = moment.now()
+    let startupTimeMilis = end - start
+    console.log("Started server in " + (startupTimeMilis / 1000) + "s")
 });
