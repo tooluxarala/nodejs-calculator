@@ -172,6 +172,7 @@ Ce projet est une serie d'exercices pour apprendre et bien se familiariser avec 
 ## IV. Ajout du gestionnaire de paquets/dépendances NPM
 
 ### 1 - Ajouter NPM au projet 
+- Documentation: https://www.npmjs.com/
 - Executer la commande ``npm init`` :
 ```
 package name: (nodejs-calculator) 
