@@ -93,40 +93,6 @@
 
 ## III. Approfondissement (devoir maison)
 
-### 1 - créer le endpoint REST /sum qui utilise Calculator.sum([termes]) et permet d’ajouter les éléments d’une liste envoyé en paramètre
-
-- Lancer le programme avec ``node server.mjs``.
-- Tester l’application en utilisant le navigateur our un client HTTP. Vous devriez voir le message:
- ```
-  {
-        "operation": "sum",
-        "params": [
-            2,
-            3,
-            5
-        ],
-        "result": 10
-    }
- ```
-
-### 2 – créer le endpoint REST /mean qui utilise Calculator.mean([termes]) et permet de calculer la moyenne des éléments d’une liste envoyé en paramètre selon leur signe
-
-- Lancer le programme avec ``node server.mjs``.
-- Tester l’application en utilisant le navigateur our un client HTTP. Vous devriez voir le message:
-```
-  {
-        "operation": "mean",
-        "params": [
-            7,
-            -3,
-            5
-        ],
-        "result": 3
-  }
-```
-
-## III. Approfondissement (devoir maison)
-
 ### 1 - créer le endpoint REST POST /sum qui utilise Calculator.sum([termes]) et permet d’ajouter les éléments d’une liste envoyé en paramètre
 
 - Lancer le programme avec ``node server.mjs``.
