@@ -129,7 +129,7 @@
 
 ### 1 - créer le endpoint REST POST /sum qui utilise Calculator.sum([termes]) et permet d’ajouter les éléments d’une liste envoyé en paramètre
 
-- Lancer le programme avec ``node server.js``.
+- Lancer le programme avec ``node server.mjs``.
 - Tester l’application en utilisant le navigateur our un client HTTP. Vous devriez voir le message:
  ```
   {
@@ -145,7 +145,7 @@
 
 ### 2 – créer le endpoint REST POST /mean qui utilise Calculator.mean([termes]) et permet de calculer la moyenne des éléments d’une liste envoyé en paramètre selon leur signe
 
-- Lancer le programme avec ``node server.js``.
+- Lancer le programme avec ``node server.mjs``.
 - Tester l’application en utilisant le navigateur our un client HTTP. Vous devriez voir le message:
 ```
   {
@@ -161,7 +161,7 @@
 
 ### 3 - créer le endpoint REST GET /operations qui utilise Calculator.operations() et permet de retourner une liste des opérations supportées par la calculatrice
 
-- Lancer le programme avec ``node server.js``.
+- Lancer le programme avec ``node server.mjs``.
 - Tester l’application en utilisant le navigateur our un client HTTP. Vous devriez voir le message:
  ```
   [
@@ -176,7 +176,7 @@
 
 ### 4 - créer le endpoint REST GET /operations/:name qui utilise Calculator.operation(name) et permet de retourner les informations sur une operation donnée
 
-- Lancer le programme avec ``node server.js``.
+- Lancer le programme avec ``node server.mjs``.
 - Tester l’application en utilisant le navigateur our un client HTTP. Vous devriez voir le message:
  ```
  # GET /operations/add
@@ -201,3 +201,96 @@
   }
  ```
 
+
+## IV. Ajout du gestionnaire de paquets/dépendances NPM
+
+### 1 - Ajouter NPM au projet
+- Executer la commande ``npm init`` :
+```
+package name: (nodejs-calculator)
+version: (1.0.0)
+description: A Node.js calculator API
+entry point: server.mjs
+test command:
+git repository:
+keywords: Node.js, Math
+author: Toolu Xarala
+license: (ISC) Apache-2.0
+
+```
+- Vérifier que le fichier ``package.json`` est créé avec les bonnes valeurs
+```
+{
+  "name": "nodejs-calculator",
+  "version": "1.0.0",
+  "description": "A Node.js calculator API",
+  "main": "server.mjs",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.mjs"
+  },
+  "keywords": [
+    "Node.js",
+    "Math"
+  ],
+  "author": "Toolu Xarala",
+  "license": "Apache-2.0"
+}
+```
+
+- lancer le programme avec ``npm start``
+- Vérifier que le programme est bien lancé en testant tous les endpoints précédemment créés
+
+### 2 - Ajouter la librairie Nodemon en mode developpement pour faire du hot-reloading
+- Documentation: https://github.com/remy/nodemon#nodemon
+- Executer la commande ``npm install nodemon --save-dev``
+- Vérifier que la dépendance de développement ``nodemon``est bien créée dans le fichier ``package.json``:
+```
+ "devDependencies": {
+    "nodemon": "^3.1.4"
+  }
+
+```
+- Vérifier que le dossier des dépendances ``node_modules`` est bien créé et contient ``Nodemon``. Ce dossier est créé et gèré par NPM, donc pas besoin d'y toucher. C'est un dossier à ne surtout pas commiter dans Git.
+- Vérifier également que le fichier ``package-lock.json`` est bien créée. Ce fichier est généré et gèré par NPM donc pas besoin d'y toucher. Il contient toute la hiérachie des dépendances et doit être commité sur Git.
+- Modifier le start script pour utiliser ``Nodemon`` :
+```
+  "scripts": {
+      "test": "echo \"Error: no test specified\" && exit 1",
+      "start": "nodemon server.mjs"
+  }
+```
+- lancer le programme avec ``npm start``
+- Ajouter le log ``console.log("New log before start !")`` dans le fichier ``server.mjs`` après la ligne ``console.log("Div: 9 / 3 = " + Calculator.divide(9, 3))`` et enregistrer.
+- Vérifier que le programme redémare automatiquement dans le terminal. Le nouveau log doit apparaître dans le terminal.
+
+### 3 - Ajouter la librairie monment.js pour calculer le temps de démarrage du server
+- Documentation: https://momentjs.com/docs/
+- Executer la commande ``npm install moment``
+- Vérifier que la dépendance ``moment`` est bien créée dans le fichier ``package.json``:
+```
+  "dependencies": {
+    "moment": "^2.30.1"
+  }
+
+```
+- Ajouter ce code snippet au début du fichier ``server.mjs``:
+
+```
+const moment = require('moment')
+
+let start = moment.now();
+
+```
+- Ajouter/Mettre à jour ce code snippet à la fin du fichier ``server.mjs``:
+
+```
+server.listen(port, hostname, () => {
+    console.log(`Server running at http://${hostname}:${port}/`);
+    let end = moment.now()
+    let startupTimeMilis = end - start
+    console.log("Started server in " + (startupTimeMilis / 1000) + "s")
+});
+
+```
+- Enregistrer le fichier. Vérifier que le log de démarrage ``"Started server in ...s"`` apparaît dans le terminal.
